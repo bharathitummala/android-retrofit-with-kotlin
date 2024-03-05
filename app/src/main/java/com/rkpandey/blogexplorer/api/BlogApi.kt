@@ -3,10 +3,13 @@ import android.telecom.Call
 import com.rkpandey.blogexplorer.models.Post
 import com.rkpandey.blogexplorer.models.User
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BlogApi {
+
     @GET("posts")
     suspend fun getPosts(@Query("_page")page: Int = 1, @Query("_limit")limit: Int = 10): List<Post>
 
