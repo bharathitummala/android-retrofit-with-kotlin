@@ -8,9 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rkpandey.blogexplorer.models.Post
 
-class BlogPostAdapter(private val context: Context, private val posts: List<Post>) :
+class BlogPostAdapter(private val context: Context,
+                      private val posts: List<Post>,
+                      private val itemClickListener: ItemClickListener) :
     RecyclerView.Adapter<BlogPostAdapter.ViewHolder>() {
-
+    interface ItemClickListener{
+        fun onItemClick(post: Post)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_blog_post, parent, false)
         return ViewHolder(view)
@@ -31,6 +35,9 @@ class BlogPostAdapter(private val context: Context, private val posts: List<Post
             tvId.text = "Post #${post.id}"
             tvTitle.text = post.title
             tvBody.text = post.body
+            itemView.setOnClickListener{
+                itemClickListener.onItemClick(post)
+            }
         }
     }
 }
